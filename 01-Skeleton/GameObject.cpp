@@ -48,12 +48,40 @@ void CMario::Update(DWORD dt)
 	}
 }
 
+bool CBall::isColliding(const CBall& object, const CBall& other)
+{
+	float left = other.x - (object.x + MARIO_WIDTH);
+	float top = (other.y + MARIO_HEIGHT) - object.y;
+	float right = (other.x + MARIO_WIDTH) - object.x;
+	float bottom = other.y - (object.y + MARIO_HEIGHT);
+
+	return !(left > 0 || right < 0 || top < 0 || bottom > 0);
+}
+
 void CBall::Update(DWORD dt)
 {
+	vx += va * dt;
+	vy += va * dt;
 	x += vx * dt;
 	y += vy * dt;
+	
+	
 	int BackBufferWidth = CGame::GetInstance()->GetBackBufferWidth();
 	int BackBufferHeight = CGame::GetInstance()->GetBackBufferHeight();
+
+	/*if (x <= 0 || x >= BackBufferWidth - MARIO_WIDTH) {
+
+		va == 0.1f;
+	}
+
+	if (y <= 0 || y >= BackBufferHeight - MARIO_HEIGHT) {
+
+		va -= 0.1f;
+	}*/
+	//va -= .01f;
+	//if (va <= 0) { va = 0; }
+	//if (vx <= 0) { vx = 0; }
+	//if (vy <= 0) { vy = 0; }
 	if (x <= 0 || x >= BackBufferWidth - MARIO_WIDTH) {
 
 		vx = -vx;
@@ -67,6 +95,7 @@ void CBall::Update(DWORD dt)
 			x = (float)(BackBufferWidth - MARIO_WIDTH);
 		}
 	}
+	
 	if (y <= 0 || y >= BackBufferHeight - MARIO_HEIGHT) {
 
 		vy = -vy;

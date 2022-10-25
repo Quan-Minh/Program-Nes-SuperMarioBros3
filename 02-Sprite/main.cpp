@@ -41,7 +41,7 @@
 #define ID_TEX_MISC 20
 
 #define TEXTURES_DIR L"textures"
-#define TEXTURE_PATH_MARIO TEXTURES_DIR "\\mario.png"
+#define TEXTURE_PATH_MARIO TEXTURES_DIR "\\mario_transparent.png"
 #define TEXTURE_PATH_MISC TEXTURES_DIR "\\misc_transparent.png"
 #define TEXTURE_PATH_ENEMIES TEXTURES_DIR "\\enemies.png"
 
@@ -51,6 +51,10 @@ CMario *mario;
 #define MARIO_START_VX 0.1f
 
 CBrick *brick;
+CBird *bird;
+#define BIRD_START_X 10.0f
+#define BIRD_START_Y 70.0f
+
 
 LRESULT CALLBACK WinProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
@@ -92,6 +96,10 @@ void LoadResources()
 	sprites->Add(10012, 155, 154, 171, 181, texMario);
 	sprites->Add(10013, 125, 154, 141, 181, texMario);
 
+	sprites->Add(10014, 186, 154, 200, 181, texMario);
+	sprites->Add(10015, 155, 154, 171, 181, texMario);
+	sprites->Add(10016, 125, 154, 141, 181, texMario);
+
 	CAnimations * animations = CAnimations::GetInstance();
 	LPANIMATION ani;
 
@@ -117,16 +125,29 @@ void LoadResources()
 	sprites->Add(20003, 336, 117, 353, 133, texMisc);
 	sprites->Add(20004, 354, 117, 371, 133, texMisc);
 
+	sprites->Add(20005, 213, 243, 242, 260, texMisc);
+	sprites->Add(20006, 244, 244, 274, 259, texMisc);
+	sprites->Add(20007, 212, 262, 239, 278, texMisc);
+	sprites->Add(20008, 244, 261, 267, 278, texMisc);
+
 	ani = new CAnimation(100);
 	ani->Add(20001,1000);
 	ani->Add(20002);
 	ani->Add(20003);
 	ani->Add(20004);
 	animations->Add(510, ani);
+
+	ani = new CAnimation(100);
+	ani->Add(20005);
+	ani->Add(20006);
+	ani->Add(20007);
+	ani->Add(20008);
+	animations->Add(511, ani);
 	
 	
 	mario = new CMario(MARIO_START_X, MARIO_START_Y, MARIO_START_VX);
 	brick = new CBrick(100.0f, 100.0f);
+	bird = new CBird(BIRD_START_X, BIRD_START_Y, MARIO_START_VX);
 }
 
 /*
@@ -136,6 +157,7 @@ void LoadResources()
 void Update(DWORD dt)
 {
 	mario->Update(dt);
+	bird->Update(dt);
 }
 
 void Render()
@@ -160,6 +182,7 @@ void Render()
 
 		brick->Render();
 		mario->Render();
+		bird->Render();
 
 		// Uncomment this line to see how to draw a porttion of a texture  
 		//g->Draw(10, 10, texMisc, 300, 117, 316, 133);

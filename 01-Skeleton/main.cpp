@@ -90,8 +90,8 @@ void LoadResources()
 
 	mario = new CMario(MARIO_START_X, MARIO_START_Y, MARIO_START_VX, MARIO_START_VY, texMario);
 	brick = new CBrick(BRICK_X, BRICK_Y, texBrick);
-	ball[0] = new CBall(MARIO_START_X, MARIO_START_Y, MARIO_START_VX, MARIO_START_VY, texBall);
-	ball[1] = new CBall(100, 100, 0.1, 0.1, texBall);
+	ball[0] = new CBall(MARIO_START_X, MARIO_START_Y, MARIO_START_VX, MARIO_START_VY, -0.1, texBall);
+	ball[1] = new CBall(100, 100, 0.1, 0.1,-0.1, texBall);
 	//ball[2] = new CBall(-90, -100, -0.1, 0.1, texBall);
 	//ball[3] = new CBall(10, 10, 0.1, -0.1, texBall);
 	// objects.push_back(mario);

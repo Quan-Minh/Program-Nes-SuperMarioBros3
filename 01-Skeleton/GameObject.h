@@ -55,10 +55,12 @@ class CBall : public CGameObject
 	float vy;
 	float va;
 public:
-	CBall(float x, float y, float vx, float vy, LPTEXTURE texture) :CGameObject(x, y, texture)
+	CBall(float x, float y, float vx, float vy, float va, LPTEXTURE texture) :CGameObject(x, y, texture)
 	{
 		this->vx = vx;
 		this->vy = vy;
+		this->va = va;
 	};
 	void Update(DWORD dt);
+	bool isColliding(const CBall& object, const CBall& other);
 };

@@ -14,6 +14,13 @@ public:
 	void Update(DWORD dt) {}
 };
 
+//class CBrick2 : public CGameObject {
+//public:
+//	CBrick2(float x, float y) : CGameObject(x, y) {}
+//	void Render();
+//	void Update(DWORD dt) {}
+//};
+
 class CMario : public CGameObject
 {
 protected:
@@ -24,4 +31,13 @@ public:
 	void Render();
 };
 
+class CBird : public CGameObject
+{
+protected:
+	float vx;
+public:
+	CBird(float x, float y, float vx);
+	void Update(DWORD dt);
+	void Render();
+};
 
